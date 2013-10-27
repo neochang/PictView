@@ -1,0 +1,55 @@
+用CArray解决多维动态数组问题
+
+对于任何一门语言而言，多维动态数组总是一个让人有点头疼的问题，一维与二维的设计不一样，顺序访问与随机访问的设计不一样。如果在编程时需要实现高维数组，则又要翻出数据结构的书好好动一翻脑筋。其实中需简单地扩展MFC提供的CArray模板类，就可以在C++中很容易地实现任意多维动态数组。 
+
+根据CArray的使用方法，如下的几行语句似乎就实现了三维动态整型数组： 
+
+typedef CArray<int, int&> DA1;
+typedef CArray<DA1, DA1&> DA2;
+typedef CArray<DA2, DA2&> DA3;
+DA3 da3;
+ 
+
+
+da3似乎就是一个三维动态整型数组，而且是一个参差数组。但直接这样编译会出错，原因是CArray没有定义“=”运算符。为解决这个问题可以定义一个CArray的导出类。代码如下： 
+
+// UltraCArray_T.h
+//
+//////////////////////////////////////////////////////////////////////
+#if !defined(AFX_ULTRACARRAY_T_H__552AA3BD_C40E_4090_B373_53767023912A__INCLUDED_)
+#define AFX_ULTRACARRAY_T_H__552AA3BD_C40E_4090_B373_53767023912A__INCLUDED_
+#if _MSC_VER > 1000
+#pragma once
+#endif // _MSC_VER > 1000
+#include <Afxtempl.h>
+template <class TYPE, class ARG_TYPE>
+class UltraCArray_T  :  public CArray <TYPE, ARG_TYPE> 
+{
+public:
+ void operator =(const UltraCArray_T<TYPE, ARG_TYPE> &rhs);
+
+};
+
+template <class TYPE, class ARG_TYPE>
+void UltraCArray_T<TYPE, ARG_TYPE>
+::operator =(const UltraCArray_T<TYPE, ARG_TYPE> &rhs)
+{
+RemoveAll();
+Append(rhs);
+}
+
+#endif // 
+!defined(AFX_ULTRACARRAY_T_H__552AA3BD_C40E_4090_B373_53767023912A__INCLUDED_)
+ 
+
+
+使用UltraCArray_T即可实现任意多维的动态参差数组。代码如下： 
+
+typedef UltraCArray<int, int&> DA1;
+typedef UltraCArray<DA1, DA1&> DA2;
+typedef UltraCArray<DA2, DA2&> DA3;
+DA3 da3;
+ 
+
+
+此处的da3就是一个三维动态数组。可以使用CArray的任意函数调用，如使用da3[i][j][k]形式。

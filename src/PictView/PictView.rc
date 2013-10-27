@@ -1,0 +1,582 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\PictView.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#include ""l.chs\\afxprint.rc""        // printing/print preview resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\PictView.ico"
+IDR_PICTVITYPE          ICON    DISCARDABLE     "res\\PictViewDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+IDR_FULLSCREEN          BITMAP  DISCARDABLE     "res\\toolbar1.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  18, 15
+BEGIN
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_ZOOM_IN
+    BUTTON      ID_ZOOM_OUT
+    BUTTON      ID_ZOOM_FITSCREEN
+    BUTTON      ID_ZOOM_ORIGINAL
+    SEPARATOR
+    BUTTON      ID_ROTATE90_CLOCKWISE
+    BUTTON      ID_ROTATE90_ANTICLOCKWISE
+    SEPARATOR
+    BUTTON      ID_VIEW_PREVIOUS
+    BUTTON      ID_VIEW_NEXT
+    SEPARATOR
+    BUTTON      ID_FULL_SCREEN
+    SEPARATOR
+    BUTTON      ID_EDIT_DELETE
+    BUTTON      ID_EDIT_IN_MPAINT
+    BUTTON      ID_EDIT_EXTERNAL
+    SEPARATOR
+    BUTTON      ID_EFFECT_MEM_HBLINDS
+    BUTTON      ID_EFFECT_MEM_VBLINDS
+    BUTTON      ID_EFFECT_MEM_MOSAIC
+    BUTTON      ID_EFFECT_MEM_SCANFROMTOP
+    BUTTON      ID_EFFECT_MEM_SCANFROMBOTTOM
+    SEPARATOR
+    BUTTON      ID_USE_SPECIAL_EFFECT
+    BUTTON      ID_EFFECT_RANDOM
+    BUTTON      ID_EFFECT_MOSAIC
+    BUTTON      ID_EFFECT_BLINDS
+    BUTTON      ID_EFFECT_TOPDOWN
+    BUTTON      ID_EFFECT_BOTTOMUP
+    BUTTON      ID_EFFECT_LEFTRIGHT
+    BUTTON      ID_EFFECT_RIGHTLEFT
+    BUTTON      ID_EFFECT_TOPLEFT
+    BUTTON      ID_EFFECT_BOTTOMLEFT
+    BUTTON      ID_EFFECT_TOPRIGHT
+    BUTTON      ID_EFFECT_BOTTOMRIGHT
+    BUTTON      ID_APP_ABOUT
+END
+
+IDR_FULLSCREEN TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_PLAY
+    BUTTON      ID_PAUSE
+    SEPARATOR
+    BUTTON      ID_VIEW_PREVIOUS
+    BUTTON      ID_VIEW_NEXT
+    SEPARATOR
+    BUTTON      ID_ZOOM_IN
+    BUTTON      ID_ZOOM_OUT
+    BUTTON      ID_ZOOM_FITSCREEN
+    BUTTON      ID_ZOOM_ORIGINAL
+    SEPARATOR
+    BUTTON      ID_FULL_SCREEN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "文件(&F)"
+    BEGIN
+        MENUITEM "新建(&N)\tCtrl+N",            ID_FILE_NEW, GRAYED
+        MENUITEM "打开(&O)...\tCtrl+O",         ID_FILE_OPEN
+        MENUITEM "保存(&S)\tCtrl+S",            ID_FILE_SAVE
+        MENUITEM "另存为(&A)...",               ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "打印(&P)...\tCtrl+P",         ID_FILE_PRINT
+        MENUITEM "打印预览(&V)",                ID_FILE_PRINT_PREVIEW
+        MENUITEM "打印设置(&R)...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "最近的文件",                  ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "退出(&X)",                    ID_APP_EXIT
+    END
+    POPUP "编辑(&E)"
+    BEGIN
+        MENUITEM "删除(&D)\tDelete",            ID_EDIT_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "用“画图”打开并编辑(&M)",    ID_EDIT_IN_MPAINT
+        MENUITEM "用默认程序打开(&W)",          ID_EDIT_EXTERNAL
+    END
+    POPUP "查看(&V)"
+    BEGIN
+        MENUITEM "工具栏(&T)",                  ID_VIEW_TOOLBAR
+        MENUITEM "状态栏(&S)",                  ID_VIEW_STATUS_BAR
+        MENUITEM "上一张(&P)\tPage Up",         ID_VIEW_PREVIOUS
+        MENUITEM "下一张(&N)\tPage Down",       ID_VIEW_NEXT
+        MENUITEM SEPARATOR
+        MENUITEM "全屏/幻灯片(&F)\tF11",        ID_FULL_SCREEN
+    END
+    POPUP "设定效果(&C)"
+    BEGIN
+        MENUITEM "载入时使用特效(&U)",          ID_USE_SPECIAL_EFFECT
+        , CHECKED
+        MENUITEM SEPARATOR
+        MENUITEM "随机效果(&R)",                ID_EFFECT_RANDOM
+        MENUITEM SEPARATOR
+        MENUITEM "马赛克(&M)",                  ID_EFFECT_MOSAIC
+        MENUITEM "百叶窗(&B)",                  ID_EFFECT_BLINDS
+        MENUITEM SEPARATOR
+        MENUITEM "从上往下(&T)",                ID_EFFECT_TOPDOWN
+        MENUITEM "从下往上(&D)",                ID_EFFECT_BOTTOMUP
+        MENUITEM "从左往右(&L)",                ID_EFFECT_LEFTRIGHT
+        MENUITEM "从右往左(&I)",                ID_EFFECT_RIGHTLEFT
+        MENUITEM SEPARATOR
+        MENUITEM "左上进入(&Q)",                ID_EFFECT_TOPLEFT
+        MENUITEM "左下进入(&A)",                ID_EFFECT_BOTTOMLEFT
+        MENUITEM "右上进入(&W)",                ID_EFFECT_TOPRIGHT
+        MENUITEM "右下进入(&S)",                ID_EFFECT_BOTTOMRIGHT
+    END
+    POPUP "特效(&S)"
+    BEGIN
+        MENUITEM "水平百叶窗(&H)",              ID_EFFECT_MEM_HBLINDS
+        MENUITEM "垂直百叶窗(&V)",              ID_EFFECT_MEM_VBLINDS
+        MENUITEM "马赛克(&M)",                  ID_EFFECT_MEM_MOSAIC
+        MENUITEM "向下扫描(&T)",                ID_EFFECT_MEM_SCANFROMTOP
+        MENUITEM "向上扫描(&B)",                ID_EFFECT_MEM_SCANFROMBOTTOM
+    END
+    POPUP "缩放(&Z)"
+    BEGIN
+        MENUITEM "逐渐放大(&I)\tCtrl+↑",       ID_ZOOM_IN
+        MENUITEM "逐渐缩小(&O)\tCtrl+↓",       ID_ZOOM_OUT
+        MENUITEM SEPARATOR
+        MENUITEM "恢复原始大小(&L)",            ID_ZOOM_ORIGINAL
+        MENUITEM "适合屏幕大小(&P)",            ID_ZOOM_FITSCREEN
+        MENUITEM SEPARATOR
+        MENUITEM "50 % (&H)",                   ID_ZOOM_HALF
+        MENUITEM "75 % (&S)",                   ID_ZOOM_75PERCENT
+        MENUITEM "150 % (&B)",                  ID_ZOOM_150PERCENT
+        MENUITEM "200 % (&D)",                  ID_ZOOM_DOUBLE
+    END
+    POPUP "旋转(&R)"
+    BEGIN
+        MENUITEM "顺时针旋转90度(&C)",          ID_ROTATE90_CLOCKWISE
+        MENUITEM "逆时针旋转90度(&A)",          ID_ROTATE90_ANTICLOCKWISE
+        MENUITEM SEPARATOR
+        MENUITEM "旋转180度(&G)",               ID_ROTATE180
+    END
+    POPUP "帮助(&H)"
+    BEGIN
+        MENUITEM "关于 Picture Viewer(&A)...",  ID_APP_ABOUT
+    END
+END
+
+IDR_POPUPMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "PopupMenu"
+    BEGIN
+        MENUITEM "上一张(&P)\tPage Up",         ID_VIEW_PREVIOUS
+        MENUITEM "下一张(&N)\tPage Down",       ID_VIEW_NEXT
+        MENUITEM SEPARATOR
+        MENUITEM "顺时针旋转90度(&C)",          ID_ROTATE90_CLOCKWISE
+        MENUITEM "逆时针旋转90度(&A)",          ID_ROTATE90_ANTICLOCKWISE
+        MENUITEM SEPARATOR
+        MENUITEM "放大(&I)\tCtrl+↑",           ID_ZOOM_IN
+        MENUITEM "缩小(&O)\tCtrl+↓",           ID_ZOOM_OUT
+        MENUITEM "适合大小(&S)",                ID_ZOOM_FITSCREEN
+        MENUITEM "原始大小(&Y)",                ID_ZOOM_ORIGINAL
+        MENUITEM SEPARATOR
+        MENUITEM "显示水平百叶窗(&H)",          ID_EFFECT_MEM_HBLINDS
+        MENUITEM "显示垂直百叶窗(&V)",          ID_EFFECT_MEM_VBLINDS
+        MENUITEM "显示马赛克效果(&M)",          ID_EFFECT_MEM_MOSAIC
+        MENUITEM "显示向上扫描(&B)",            ID_EFFECT_MEM_SCANFROMBOTTOM
+        MENUITEM "显示向下扫描(&T)",            ID_EFFECT_MEM_SCANFROMTOP
+        MENUITEM SEPARATOR
+        MENUITEM "删除(&D)\tDelete",            ID_EDIT_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "全屏/幻灯片(&F)\tF11",        ID_FULL_SCREEN
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    VK_DELETE,      ID_EDIT_DELETE,         VIRTKEY, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    VK_DOWN,        ID_ZOOM_OUT,            VIRTKEY, CONTROL, NOINVERT
+    VK_F11,         ID_FULL_SCREEN,         VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_NEXT,        ID_VIEW_NEXT,           VIRTKEY, NOINVERT
+    VK_PRIOR,       ID_VIEW_PREVIOUS,       VIRTKEY, NOINVERT
+    VK_UP,          ID_ZOOM_IN,             VIRTKEY, CONTROL, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 Picture Viewer"
+FONT 9, "宋体"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "Picture Viewer 1.0 版",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "版权所有 (C) 2005\nProgrammed by Neo",IDC_STATIC,40,25,
+                    76,17
+    DEFPUSHBUTTON   "确定",IDOK,178,7,50,14,WS_GROUP
+    LTEXT           "zhangweivictor@163.com",IDC_STATIC,128,33,98,10
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "Picture Viewer Microsoft 基础类应用程序\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "Picture Viewer\0"
+            VALUE "LegalCopyright", "版权所有 (C) 2005\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "PictView.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "Picture Viewer 应用程序\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "Picture Viewer\n\nPictVi\n\n\nPictView.Document\nPictVi Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "PictView"
+    AFX_IDS_IDLEMESSAGE     "就绪"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "扩展名"
+    ID_INDICATOR_CAPS       "大写"
+    ID_INDICATOR_NUM        "数字"
+    ID_INDICATOR_SCRL       "滚动"
+    ID_INDICATOR_OVR        "改写"
+    ID_INDICATOR_REC        "记录"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "建立新文档\n新建"
+    ID_FILE_OPEN            "打开一个现有文档\n打开"
+    ID_FILE_CLOSE           "关闭活动文档\n关闭"
+    ID_FILE_SAVE            "复制(保存)该图片\n复制(保存)该图片"
+    ID_FILE_SAVE_AS         "将活动文档以一个新文件名保存\n另存为"
+    ID_FILE_PAGE_SETUP      "改变打印选项\n页面设置"
+    ID_FILE_PRINT_SETUP     "改变打印机及打印选项\n打印设置"
+    ID_FILE_PRINT           "打印活动文档\n打印"
+    ID_FILE_PRINT_PREVIEW   "显示整页\n打印预览"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "显示程序信息，版本号和版权\n关于"
+    ID_APP_EXIT             "退出应用程序；提示保存文档\n退出"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "打开该文档"
+    ID_FILE_MRU_FILE2       "打开该文档"
+    ID_FILE_MRU_FILE3       "打开该文档"
+    ID_FILE_MRU_FILE4       "打开该文档"
+    ID_FILE_MRU_FILE5       "打开该文档"
+    ID_FILE_MRU_FILE6       "打开该文档"
+    ID_FILE_MRU_FILE7       "打开该文档"
+    ID_FILE_MRU_FILE8       "打开该文档"
+    ID_FILE_MRU_FILE9       "打开该文档"
+    ID_FILE_MRU_FILE10      "打开该文档"
+    ID_FILE_MRU_FILE11      "打开该文档"
+    ID_FILE_MRU_FILE12      "打开该文档"
+    ID_FILE_MRU_FILE13      "打开该文档"
+    ID_FILE_MRU_FILE14      "打开该文档"
+    ID_FILE_MRU_FILE15      "打开该文档"
+    ID_FILE_MRU_FILE16      "打开该文档"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "切换到下一个窗格\n下一窗格"
+    ID_PREV_PANE            "切换回前一个窗格\n前一窗格"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "将活动的窗口分隔成窗格\n分隔"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "删除被选对象\n删除"
+    ID_EDIT_CLEAR_ALL       "全部删除\n全部删除"
+    ID_EDIT_COPY            "复制被选对象并将其置于剪贴板上\n复制"
+    ID_EDIT_CUT             "剪切被选对象并将其置于剪贴板上\n剪切"
+    ID_EDIT_FIND            "查找指定的正文\n查找"
+    ID_EDIT_PASTE           "插入剪贴板内容\n粘贴"
+    ID_EDIT_REPEAT          "重复上一步操作\n重复"
+    ID_EDIT_REPLACE         "用不同的正文替换指定的正文\n替换"
+    ID_EDIT_SELECT_ALL      "选择整个文档\n选择全部"
+    ID_EDIT_UNDO            "撤消最后一步操作\n撤消"
+    ID_EDIT_REDO            "重新执行先前已撤消的操作\n重新执行"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "显示或隐藏工具栏\n显隐工具栏"
+    ID_VIEW_STATUS_BAR      "显示或隐藏状态栏\n显隐状态栏"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "改变窗口大小"
+    AFX_IDS_SCMOVE          "改变窗口位置"
+    AFX_IDS_SCMINIMIZE      "将窗口缩小成图标"
+    AFX_IDS_SCMAXIMIZE      "把窗口放大到最大尺寸"
+    AFX_IDS_SCNEXTWINDOW    "切换到下一个文档窗口"
+    AFX_IDS_SCPREVWINDOW    "切换到先前的文档窗口"
+    AFX_IDS_SCCLOSE         "关闭活动的窗口并提示保存所有文档"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "把窗口恢复到正常大小"
+    AFX_IDS_SCTASKLIST      "激活任务表"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "关闭打印预览模式\n取消预阅"
+    ID_INDICATOR_LEFT       "LEFT"
+    ID_INDICATOR_RIGHT      "RIGHT"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_USE_SPECIAL_EFFECT   "是否在载入文件及变换时使用特效显示\n是否在载入文件及变换时使用特效显示"
+    ID_ZOOM_HALF            "缩放到原来大小的 50 %\n缩放到原来大小的 50 %"
+    ID_ZOOM_ORIGINAL        "恢复原始图像大小\n恢复原始图像大小"
+    ID_ZOOM_DOUBLE          "缩放到原来大小的 2 倍\n缩放到原来大小的 2 倍"
+    ID_ZOOM_75PERCENT       "缩放到原来大小的 75 %\n缩放到原来大小的 75 %"
+    ID_ZOOM_150PERCENT      "缩放到原来大小的 1.5倍\n缩放到原来大小的 1.5倍"
+    ID_EFFECT_RANDOM        "载入时由计算机随机选定效果\n载入时由计算机随机选定效果"
+    ID_EFFECT_MOSAIC        "设定为 马赛克效果\n设定为 马赛克效果"
+    ID_EFFECT_BLINDS        "设定为 百叶窗效果\n设定为 百叶窗效果"
+    ID_EFFECT_TOPDOWN       "设定为 从上往下进入\n设定为 从上往下进入"
+    ID_EFFECT_BOTTOMUP      "设定为 从下往上进入\n设定为 从下往上进入"
+    ID_EFFECT_LEFTRIGHT     "设定为 从左往右进入\n设定为 从左往右进入"
+    ID_EFFECT_RIGHTLEFT     "设定为 从右往左进入\n设定为 从右往左进入"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EFFECT_TOPLEFT       "设定为 从左上方进入\n设定为 从左上方进入"
+    ID_EFFECT_BOTTOMLEFT    "设定为 从左下方进入\n设定为 从左下方进入"
+    ID_EFFECT_TOPRIGHT      "设定为 从右上方进入\n设定为 从右上方进入"
+    ID_EFFECT_BOTTOMRIGHT   "设定为 从右下方进入\n设定为 从右下方进入"
+    ID_VIEW_NEXT            "查看当前目录中下一张图片(Page Down)\n查看当前目录中下一张图片((Page Down))"
+    ID_VIEW_PREVIOUS        "查看当前目录中上一张图片(Page Up)\n查看当前目录中上一张图片(Page Up)"
+    ID_EDIT_DELETE          "删除当前图片(按Delete键即可)\n删除当前图片(按Delete键即可)"
+    ID_ZOOM_IN              "逐渐放大(Ctrl+↑)\n逐渐放大(Ctrl+↑)"
+    ID_ZOOM_OUT             "逐渐缩小(Ctrl+↓)\n逐渐缩小(Ctrl+↓)"
+    ID_EDIT_EXTERNAL        "用系统默认关联的程序浏览或编辑\n用系统默认关联的程序浏览或编辑"
+    ID_EDIT_IN_MPAINT       "用Windows“画图”程序打开并编辑\n用Windows“画图”程序打开并编辑"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FULL_SCREEN          "以幻灯片模式全屏浏览\n以幻灯片模式全屏浏览"
+    ID_PLAY                 "开始幻灯片\n开始幻灯片"
+    ID_PAUSE                "停止幻灯片\n停止幻灯片"
+    ID_ZOOM_FITSCREEN       "调整图片到适合屏幕大小\n调整图片到适合屏幕大小"
+    ID_ROTATE90_CLOCKWISE   "将图像顺时针旋转90度\n将图像顺时针旋转90度"
+    ID_EFFECT_MEM_VBLINDS   "显示垂直百叶窗效果\n显示垂直百叶窗效果"
+    ID_EFFECT_MEM_HBLINDS   "显示水平百叶窗效果\n显示水平百叶窗效果"
+    ID_EFFECT_MEM_MOSAIC    "显示马赛克效果\n显示马赛克效果"
+    ID_EFFECT_MEM_SCANFROMTOP "显示向下扫描效果\n显示向下扫描效果"
+    ID_EFFECT_MEM_SCANFROMBOTTOM "显示向上扫描效果\n显示向上扫描效果"
+    ID_ROTATE90_ANTICLOCKWISE "将图像逆时针旋转90度\n将图像逆时针旋转90度"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_ROTATE180            "将图像旋转180度\n将图像旋转180度"
+END
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\PictView.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#include "l.chs\afxprint.rc"        // printing/print preview resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

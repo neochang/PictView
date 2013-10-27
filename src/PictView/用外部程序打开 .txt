@@ -1,0 +1,14 @@
+void CThePicView::OnFileEdit() 
+{
+// TODO: Add your command handler code here
+CThePicDoc* pDoc = GetDocument();
+
+LPCTSTR ext = _tcsrchr(pDoc->m_PicList[pDoc->m_iCurrFileNum],_T('.'));
+if((ext[1] =='b'||ext[1] =='B')&&(ext[2] =='m'||ext[2] =='M')
+&&(ext[3] =='p'||ext[3] =='P'))
+{
+if(NULL== ShellExecute(NULL,"open","mspaint.exe",
+pDoc->m_PicList[pDoc->m_iCurrFileNum],"",SW_SHOW))
+return ;
+}
+}

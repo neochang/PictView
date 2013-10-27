@@ -1,0 +1,433 @@
+http://members.easyshag.com/femaledesperation/cg01.html
+http://members.easyshag.com/femaledesperation/gillian22.html#top
+主题：贴一个BMP文件读写的程序吧，看到不少人问 　 
+ 
+
+bmpTest.h: 介绍BMP文件的格式及结构定义
+bmpTest.cpp : 24bitBMP颜色数据到256色位图颜色数据的转换函数实现，具体算法可参考以 前的一个帖子
+bmpTransfer.cpp:读入一个24bitBMP文件，转换成一个256色BMP文件的程序
+
+编译完成后得到的程序，如bmpTransfer.exe
+执行bmpTransfer file1 file2
+file1是24bit的BMP位图源文件名，file2是新生成的256色位图文件名
+
+可以用windows画板程序查看结果，似乎比直接用画板程序将24bitBMP存成256色BMP文件的转换效果要好哦。
+
+/*************
+bmpTest.h
+**************/
+#ifndef __BMPTEST_H_
+#define __BMPTEST_H_
+
+#include 
+
+typedef unsigned charBYTE;
+typedef unsigned short WORD;
+
+
+// BMP图像各部分说明如下
+
+/***********
+第一部分位图文件头
+该结构的长度是固定的，为14个字节，各个域的依次如下：
+2byte：文件类型，必须是0x4d42，即字符串"BM"。
+4byte：整个文件大小
+4byte：保留字，为0
+4byte：从文件头到实际的位图图像数据的偏移字节数。
+*************/
+
+typedef struct
+{
+long imageSize;
+long blank;
+long startPosition;
+void show(void)
+{
+printf("BMP Head:\n");
+printf("Image Size:%d\n",imageSize);
+printf("Image Data Start Position : %d\n",startPosition);
+}
+}BmpHead;
+
+/*********************
+第二部分位图信息头
+该结构的长度也是固定的，为40个字节，各个域的依次说明如下：
+4byte：本结构的长度，值为40
+4byte：图像的宽度是多少象素。
+4byte：图像的高度是多少象素。
+2Byte：必须是1。
+2Byte：表示颜色时用到的位数，常用的值为1(黑白二色图)、4(16色图)、8(256色图)、24(真彩色图)。
+4byte：指定位图是否压缩，有效值为BI_RGB，BI_RLE8，BI_RLE4，BI_BITFIELDS。Windows位图可采用RLE4和RLE8的压缩格式，BI_RGB表示不压缩。
+4byte：指定实际的位图图像数据占用的字节数，可用以下的公式计算出来：
+图像数据 = Width' * Height * 表示每个象素颜色占用的byte数(即颜色位数/8,24bit图为3，256色为1）
+要注意的是：上述公式中的biWidth'必须是4的整数倍(不是biWidth，而是大于或等于biWidth的最小4的整数倍)。
+如果biCompression为BI_RGB，则该项可能为0。
+4byte：目标设备的水平分辨率。
+4byte：目标设备的垂直分辨率。
+4byte：本图像实际用到的颜色数，如果该值为0，则用到的颜色数为2的(颜色位数)次幂,如颜色位数为8，2^8=256,即256色的位图
+4byte：指定本图像中重要的颜色数，如果该值为0，则认为所有的颜色都是重要的。
+***********************************/
+typedef struct 
+{
+longLength;
+longwidth;
+longheight;
+WORDcolorPlane;
+WORDbitColor;
+longzipFormat; 
+longrealSize;
+longxPels;
+longyPels;
+longcolorUse;
+longcolorImportant;
+void show(void)
+{
+printf("infoHead Length:%d\n",Length);
+printf("width&height:%d*%d\n",width,height);
+printf("colorPlane:%d\n",colorPlane);
+printf("bitColor:%d\n",bitColor);
+printf("Compression Format:%d\n",zipFormat);
+printf("Image Real Size:%d\n",realSize);
+printf("Pels(X,Y):(%d,%d)\n",xPels,yPels);
+printf("colorUse:%d\n",colorUse);
+printf("Important Color:%d\n",colorImportant);
+}
+}InfoHead;
+
+/***************************
+第三部分调色盘结构
+对于256色BMP位图，颜色位数为8，需要2^8 = 256个调色盘；
+对于24bitBMP位图，各象素RGB值直接保存在图像数据区，不需要调色盘，不存在调色盘区
+rgbBlue：该颜色的蓝色分量。
+rgbGreen：该颜色的绿色分量。
+rgbRed：该颜色的红色分量。
+rgbReserved：保留值。
+************************/
+typedef struct
+{
+BYTErgbBlue;
+BYTErgbGreen;
+BYTErgbRed;
+BYTErgbReserved;
+void show(void)
+{
+printf("Mix Plate B,G,R:%d %d %d\n",rgbBlue,rgbGreen,rgbRed); 
+}
+}RGBMixPlate;
+
+/****************************
+第四部分图像数据区
+对于用到调色板的位图，图像数据就是该象素颜色在调色板中的索引值；
+对于真彩色图，图像数据就是实际的R、G、B值。
+2色图，用1位就可以表示该象素的颜色，所以1个字节可以表示8个象素。
+16色图，用4位可以表示一个象素的颜色，所以1个字节可以表示2个象素。
+256色图，1个字节刚好可以表示1个象素。
+真彩色图，3个字节才能表示1个象素。
+****************************/
+
+
+//将24bit的象素颜色数据转换为256色图的图像数据(即索引值)
+int Transfer(WORD *color24bit, int len, BYTE *Index, RGBMixPlate *mainColor);
+
+#endif
+
+/***************
+bmpTest.cpp
+****************/
+#include "bmpTest.h"
+#include 
+#include 
+
+//计算平方差的函数
+int PFC(int color1, int color2)
+{
+int x,y,z;
+x = (color1 & 0xf) - (color2 & 0xf);
+y = ((color1>>4) & 0xf) - ((color2>>4) & 0xf);
+z = ((color1>>8) & 0xf) - ((color2>>8) & 0xf);
+return (x*x + y*y + z*z);
+};
+
+//直接插入排序
+int Sort1(int *src, int *attach, int n)
+{
+int cur, cur1;
+int i,j,k=0;
+for (i = 1; i < n; i++)
+{
+cur= src[i];
+cur1 = attach[i];
+for (j = i - 1; j >= 0; j--)
+{
+if (cur > src[j])
+{
+src[j+1]= src[j];
+attach[j+1] = attach[j];
+}
+else
+break;
+}
+src[j+1]= cur;
+attach[j+1] = cur1;
+}
+return 0;
+}
+
+//快速排序
+int Sort2(int *src, int *attach, int n)
+{
+if (n <= 12)
+return Sort1(src, attach, n);
+int low = 1, high = n - 1;
+int tmp;
+while (low <= high)
+{
+while (src[low] >= src[0])
+{
+if (++low > n - 1)
+break;
+}
+while (src[high] < src[0])
+{
+if (--high < 1)
+break;
+}
+if (low > high)
+break;
+{
+tmp= src[low];
+src[low]= src[high];
+src[high]= tmp;
+tmp= attach[low];
+attach[low]= attach[high];
+attach[high]= tmp;
+}
+low++;
+high--;
+}
+
+
+{
+tmp= src[low - 1];
+src[low - 1]= src[0];
+src[0]= tmp;
+tmp= attach[low - 1];
+attach[low - 1]= attach[0];
+attach[0]= tmp;
+}
+if (low > 1)
+Sort2(src, attach, low - 1);
+if (low < n)
+Sort2(&src[low], &attach[low], n - low);
+return 0;
+}
+
+//将24bit的象素颜色数据转换为256色图的图像数据(即索引值)
+int Transfer(WORD *color24bit, int len, BYTE *Index, RGBMixPlate *mainColor)
+{
+int usedTimes[4096] = {0};
+int miniColor[4096];
+for (int i = 0; i < 4096; i++)
+miniColor[i] = i;
+i = 0;
+for (i = 0; i < len; i++)
+{
+assert(color24bit[i] < 4096);
+usedTimes[color24bit[i]]++;
+}
+
+int numberOfColors = 0;
+for (i = 0; i < 4096; i++)
+{
+if (usedTimes[i] > 0)
+numberOfColors++;
+}
+
+//对usedTimes进行排序，排序过程中minColor数组(保存了颜色值)也作与useTimes
+//数组相似的交换
+Sort2(usedTimes, miniColor, 4096);
+
+//usedTimes数组中是各颜色使用频率，从高到低排列，显然第numberOfColor个之后的都为0
+//miniColor数组中是相应的颜色数据
+//将前256个颜色数据保存到256色位图的调色盘中
+for (i = 0; i < 256; i++)
+{
+mainColor[i].rgbBlue= (BYTE)((miniColor[i]>>8)<<4);
+mainColor[i].rgbGreen= (BYTE)(((miniColor[i]>>4) & 0xf)<<4);
+mainColor[i].rgbRed= (BYTE)((miniColor[i] & 0xf)<<4);
+mainColor[i].rgbReserved = 0;
+}
+
+int *colorIndex = usedTimes;//用原来的useTimes数组来保存索引值
+memset(colorIndex, 0, sizeof(int) * 4096);
+
+if (numberOfColors <= 256)
+{
+for (i = 0; i < numberOfColors; i++)
+colorIndex[miniColor[i]] = i;
+}
+else//为第256之后的颜色在前256种颜色中找一个最接近的
+{
+for (i = 0; i < 256; i++)
+colorIndex[miniColor[i]] = i;
+
+int index, tmp, tmp1;
+for (i = 256; i < numberOfColors; i++)
+{
+tmp= PFC(miniColor[0], miniColor[i]);
+index = 0;
+for (int j = 1; j < 256; j++)
+{
+tmp1 = PFC(miniColor[j], miniColor[i]);
+if (tmp > tmp1)
+{
+tmp = tmp1;
+index = j;
+}
+}
+colorIndex[miniColor[i]] = index;
+}
+}
+//记录各点颜色数据的索引值，即256色位图的颜色数据
+for (i = 0; i < len; i++)
+{
+assert(colorIndex[color24bit[i]] < 256);
+Index[i] = colorIndex[color24bit[i]];
+}
+
+return 1;
+}
+
+/********************
+bmpTransfer.cpp
+********************/
+#include "bmpTest.h"
+#include 
+
+int __cdecl main(int argc,char* argv[])
+{
+if (argc < 3)
+{
+printf("Usage:\n");
+printf("%s filename1 filename2\n", argv[0]);
+printf("filename1 : source 24bit BMP filenamelike: xxx.bmp\n");
+printf("filename2 : new 256 color BMP filename\n");
+return -1;
+}
+BmpHeadheadBMP;
+InfoHead infoHead; 
+FILE* p;
+char* filename = argv[1];
+p = fopen(filename,"rb");
+if (p == NULL)
+{
+printf("!!!file %s open failed.\n", filename);
+}
+
+printf("file %s open success.\n",filename); 
+/**********read BMP head ********************/
+fseek(p,2,SEEK_CUR);
+fread(&headBMP,1,12,p);
+headBMP.show();
+fread(&infoHead,1,40,p);
+infoHead.show();
+if (infoHead.bitColor != 24)
+{
+fclose(p);
+printf("This is not a 24bit BMP file.\n");
+return -1;
+}
+/***********read Image Date**************/
+long nData = infoHead.realSize;
+BYTE* pColorData = new BYTE[nData];
+fread(pColorData,1,nData,p);
+printf("last 4 byte of color Data:%x %x %x %x\n",\
+pColorData[nData-4],pColorData[nData-3],\
+pColorData[nData-2],pColorData[nData-1]);
+
+/***********read file over ***************/
+int leftData = 0;
+char ch = 0;
+while (!feof(p))
+{
+fread(&ch,1,1,p);
+leftData++;
+}
+if (leftData)
+printf("%d bytes not read in file.\n", leftData);
+printf("read file over.\n");
+if(!fclose(p))
+{
+printf("file close.\n");
+}
+// 24位BMP文件信息都读出来了，可以查看打印信息
+
+/************24bit到256色的颜色数据转换*****************/
+BYTE* Index = new BYTE[nData/3];
+RGBMixPlatemainColor[256];
+memset(mainColor, 0, sizeof(mainColor));
+WORD* shortColor = new WORD[nData/3];
+int iRed, iGreen, iBlue;
+for (int i = 0; i < nData/3; i++)
+{//取RGB颜色的高4位
+iRed= pColorData[i*3]>>4;
+iGreen= pColorData[i*3+1]>>4;
+iBlue= pColorData[i*3+2]>>4;
+shortColor[i] = (iRed<<8) + (iGreen<<4) + iBlue;
+}
+delete []pColorData;
+//调用转换函数
+Transfer(shortColor, nData/3, Index, mainColor);
+
+delete []shortColor;
+//转换完成，256色位图的调色盘数据(保存在mainColor)和图像数据区的数据(保存在Index中)
+
+/************写一个新的256色BMP文件*******************/
+
+//修改一下前面读出的BmpHead和InfoHead的结构信息
+headBMP.imageSize = 14 + 40 + 4*256 + nData/3;
+// 4*256是调色盘的长度，nData/3是图像数据区长度
+headBMP.startPosition += 4*256;//新文件加上了调色盘部分
+infoHead.bitColor = 8;//颜色位数改为8
+infoHead.realSize = nData/3;//图像数据区长度
+
+//写新文件
+char* newFile = argv[2];
+FILE *p1 = fopen(newFile,"wb");
+if (NULL == p1)
+{
+printf("open new file failed.\n");
+return -1;
+}
+char hh[2] = {0x42, 0x4D};
+fwrite(hh,1,2,p1);//BMP文件开头两字节, 0x4d42 = "BM"
+fwrite(&headBMP, 1, 12, p1);//BMP文件头 
+fwrite(&infoHead, 1, 40, p1);//BMP文件头信息 
+fwrite(mainColor, 1, sizeof(mainColor), p1);//写调色盘信息
+fwrite(Index, 1, nData/3, p1);//颜色数据
+fclose(p1);
+
+//释放分配的内存
+delete []Index;
+return 0;
+}
+ 
+
+ 
+
+作者：ywm520lq
+专家分：70
+ 
+
+会员信息
+发短消息
+所属BLOG  
+ 发表时间：2005-1-14 22:43:00  
+
+
+--------------------------------------------------------------------------------
+
+　第 1 楼 
+
+做的很好，特别是对BMP文件格式的分析介绍，VC下调试通过，比windows的图画转换到256色要完美漂亮，但对一特殊宽度出了点问题，由于时间不多，可能是误操作，不好意思，没能仔细看 
+ 

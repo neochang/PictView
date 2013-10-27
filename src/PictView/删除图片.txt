@@ -1,0 +1,82 @@
+删除文件
+CString FromStr;
+	FromStr = pDoc->m_PicList[pDoc->m_iCurrFileNum];
+	FromStr+='\0';
+	SHFILEOPSTRUCT FileOp; 
+	FileOp.hwnd = NULL; 
+	FileOp.wFunc = FO_DELETE; 
+	FileOp.pFrom = FromStr;//FromBuff; 
+	FileOp.pTo = NULL; 
+	FileOp.fFlags = FOF_ALLOWUNDO | FOF_NOERRORUI;
+	FileOp.fAnyOperationsAborted = TRUE;
+	FileOp.hNameMappings = NULL;
+	FileOp.lpszProgressTitle = _T("正在删除文件……");
+	::SHFileOperation( &FileOp );
+
+	ReInitpicList();
+	pDoc->m_bSmall = TRUE;  
+	pDoc->m_iLarge = 1; 
+	if(pDoc->m_iCurrFileNum == 0)
+	{
+		if(FALSE == pDoc->LoadImage(pDoc->m_PicList[0]))
+			return ;
+	}
+	else
+	{
+		if(FALSE == pDoc->LoadImage(pDoc->m_PicList[pDoc->m_iCurrFileNum - 1]))
+			return ;
+	}
+	
+	
+查找文件
+BOOL CThePicDoc::InitPicList(LPCTSTR pszFileName)
+{ 
+	BOOL bRet = FALSE;
+	char drive[_MAX_DRIVE];   
+	char dir[_MAX_DIR];
+	char fname[_MAX_FNAME];   
+	char ext[_MAX_EXT];
+	_splitpath(pszFileName, drive, dir, fname, ext); 
+
+	CString str;
+	str.Format("%s%s",drive,dir);
+	str = str + "*.*";
+
+        CFileFind cFind;
+	BOOL ans = cFind.FindFile(str);
+	m_iFileNumber = 0;
+	while(ans)
+	{
+		ans = cFind.FindNextFile();
+		if(cFind.IsDirectory())
+			continue;
+		CString FilName = cFind.GetFileName();
+		LPCTSTR pszExt = _tcsrchr(FilName,_T('.'));
+		if((_tcsicmp(pszExt,".bmp") == 0)||(_tcsicmp(pszExt,".tga") == 0)||(_tcsicmp(pszExt,".pcx") == 0))
+		{
+			m_PicList[m_iFileNumber] = cFind.GetFileName();
+			CString FilePath;
+			FilePath.Format("%s%s",drive,dir);
+			m_PicList[m_iFileNumber] =FilePath + m_PicList[m_iFileNumber] ;
+			m_iFileNumber++;
+		}
+		
+		
+	}
+	cFind.Close();
+
+	return TRUE;
+}
+重建列表
+void CThePicView::ReInitpicList()
+{
+	CThePicDoc* pDoc = GetDocument();
+	//在删除的图片列表前的文件列表部分不变
+	//在删除的图片列表后的部分列表前移
+	for(int i = pDoc->m_iCurrFileNum + 1;i<pDoc->m_iFileNumber;i++)
+	{
+		pDoc->m_PicList[i - 1] = pDoc->m_PicList[i];
+	}
+	pDoc->m_iFileNumber--;
+}
+

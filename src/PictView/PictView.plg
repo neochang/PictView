@@ -1,0 +1,102 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: PictView - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x804 /fo"Release/PictView.res" /d "NDEBUG" /d "_AFXDLL" "I:\!Backup\毕业设计\PictView\PictView.rc"" 
+Creating temporary file "C:\DOCUME~1\Neo\LOCALS~1\Temp\RSP31.tmp" with contents
+[
+/nologo /MD /W3 /GX /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Release/PictView.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"I:\!Backup\毕业设计\PictView\Lib\CqOctree.cpp"
+"I:\!Backup\毕业设计\PictView\Lib\Dib.cpp"
+"I:\!Backup\毕业设计\PictView\Lib\dibapi.cpp"
+"I:\!Backup\毕业设计\PictView\Lib\Gif.cpp"
+"I:\!Backup\毕业设计\PictView\Lib\GIFAPI.CPP"
+"I:\!Backup\毕业设计\PictView\Lib\IP.cpp"
+"I:\!Backup\毕业设计\PictView\Lib\Jpeg.cpp"
+"I:\!Backup\毕业设计\PictView\ClassImage.cpp"
+"I:\!Backup\毕业设计\PictView\ImageBmp.cpp"
+"I:\!Backup\毕业设计\PictView\ImageBmpConvert.cpp"
+"I:\!Backup\毕业设计\PictView\ImagePcx.cpp"
+"I:\!Backup\毕业设计\PictView\ImageTga.cpp"
+"I:\!Backup\毕业设计\PictView\MainFrm.cpp"
+"I:\!Backup\毕业设计\PictView\PictView.cpp"
+"I:\!Backup\毕业设计\PictView\PictViewDoc.cpp"
+"I:\!Backup\毕业设计\PictView\PictViewView.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Neo\LOCALS~1\Temp\RSP31.tmp" 
+Creating temporary file "C:\DOCUME~1\Neo\LOCALS~1\Temp\RSP32.tmp" with contents
+[
+/nologo /MD /W3 /GX /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Release/PictView.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"I:\!Backup\毕业设计\PictView\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Neo\LOCALS~1\Temp\RSP32.tmp" 
+Creating temporary file "C:\DOCUME~1\Neo\LOCALS~1\Temp\RSP33.tmp" with contents
+[
+Lib/Jpeglib2.lib winmm.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/PictView.pdb" /machine:I386 /nodefaultlib:"libc.lib" /out:"Release/PictView.exe" /IGNORE:4089 
+".\Release\CqOctree.obj"
+".\Release\Dib.obj"
+".\Release\dibapi.obj"
+".\Release\Gif.obj"
+".\Release\GIFAPI.OBJ"
+".\Release\IP.obj"
+".\Release\Jpeg.obj"
+".\Release\ClassImage.obj"
+".\Release\ImageBmp.obj"
+".\Release\ImageBmpConvert.obj"
+".\Release\ImagePcx.obj"
+".\Release\ImageTga.obj"
+".\Release\MainFrm.obj"
+".\Release\PictView.obj"
+".\Release\PictViewDoc.obj"
+".\Release\PictViewView.obj"
+".\Release\StdAfx.obj"
+".\Release\PictView.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\Neo\LOCALS~1\Temp\RSP33.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+
+NOTE: WINVER has been defined as 0x0500 or greater which enables
+Windows NT 5.0 and Windows 98 features. When these headers were released,
+Windows NT 5.0 beta 1 and Windows 98 beta 2.1 were the current versions.
+
+For this release when WINVER is defined as 0x0500 or greater, you can only
+build beta or test applications.  To build a retail application,
+set WINVER to 0x0400 or visit http://www.microsoft.com/msdn/sdk
+to see if retail Windows NT 5.0 or Windows 98 headers are available.
+
+See the SDK release notes for more information.
+
+Compiling...
+CqOctree.cpp
+Dib.cpp
+dibapi.cpp
+Gif.cpp
+GIFAPI.CPP
+IP.cpp
+Jpeg.cpp
+ClassImage.cpp
+ImageBmp.cpp
+ImageBmpConvert.cpp
+ImagePcx.cpp
+ImageTga.cpp
+MainFrm.cpp
+PictView.cpp
+PictViewDoc.cpp
+PictViewView.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+PictView.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
